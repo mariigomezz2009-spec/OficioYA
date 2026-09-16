@@ -7,11 +7,18 @@ const { email, password } = data;
 
 }
 
-function register(data, callback) {
+function usuarioRegistro(data, callback) {
 
 }
+
+function profesionalRegistro(data,callback){
+
+} 
+
 
 module.exports = {
     login,
-    register
+    usuarioRegistro,
+    profesionalRegistro
 }
+  
