@@ -30,7 +30,7 @@ conexion.query("SELECT * FROM categorias ",callback)
 }
 
 function borrarCategorias(data, callback) {
-    const  id  = Number(data)
+    const  id  = Number(data.id)
     conexion.query(
         "DELETE FROM categorias WHERE id = ?",
         [id],
@@ -40,6 +40,7 @@ function borrarCategorias(data, callback) {
 
 function actualizarCategorias(data, callback){
     const {  nombre, descripcion } = data
+    const id = Number(data.id)
     if (!id && !nombre) {
         return callback(new Error("datos incompletos"))
     }else{
