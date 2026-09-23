@@ -63,9 +63,37 @@ function usuarioRegistro(req, res) {
 }
 
 
-function profesionalRegistro(req, res) {
-    console.log("registro de profesional bien hecho para testear en postman")
-}
+   const profesionalRegistro = async (req, res) => {
+  try {
+    const { nombre, apellido, email, password } = req.body;
+
+    if (!nombre || !apellido || !email || !password) {
+      return res.status(400).json({ message: 'Todos los campos obligatorios deben ser completados.' });
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+
+    const nuevoProfesional = await authService.profesionalRegistro({
+      ...req.body,
+      password: hash,
+    });
+
+    return res.status(201).json({
+      message: 'Profesional registrado con éxito',
+      data: nuevoProfesional
+    });
+
+  } catch (error) {
+    console.error('Error al registrar profesional:', error);
+
+    if (error.code === 'ER_DUP_ENTRY') {
+      return res.status(400).json({ message: 'El correo electrónico ya está registrado.' });
+    }
+
+    return res.status(500).json({ message: 'Error interno del servidor' });
+  }
+};
+
 
 module.exports = {
     login,

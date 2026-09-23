@@ -8,6 +8,10 @@ function getUsuario() {
     return usuarioLogueado;
 }
 
+function isAdmin(){
+
+}
+
 module.exports = {
     setUsuario,
     getUsuario
