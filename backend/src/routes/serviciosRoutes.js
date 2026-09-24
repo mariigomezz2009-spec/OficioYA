@@ -6,15 +6,15 @@ const {
     obtenerServicioPorId,
     crearServicio,
     actualizarServicio,
-    eliminarServicio
+    eliminarServicio,
+    obtenerMisServicios
 } = require('../controllers/serviciosController');
 
 
 router.get('/', buscarServicios);
 router.get('/:id', obtenerServicioPorId);
-
 router.post('/', verificarToken, esProfesional, crearServicio);
-router.get('/mis-servicios/lista', verificarToken, obtenerMisServicios);
+router.get('/mis-servicios/lista', verificarToken, esProfesional, obtenerMisServicios);
 router.put('/:id', verificarToken, esProfesional, actualizarServicio);
 router.delete('/:id', verificarToken, esProfesional, eliminarServicio);
 
