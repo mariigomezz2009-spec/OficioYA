@@ -1,20 +1,21 @@
 const express = require('express');
 const router = express.Router();
-
-const{
-    crearServicio,
+const { verificarToken, esProfesional } = require('../middlewares/auth');
+const {
     buscarServicios,
     obtenerServicioPorId,
-    obtenerMisServicios,
+    crearServicio,
     actualizarServicio,
     eliminarServicio
-} = require("../controllers/serviciosController")
+} = require('../controllers/serviciosController');
 
-router.post('/crear-servicios', crearServicio);
-router.get('/obtener-servicios', buscarServicios);
-router.get('/mis-servicios', obtenerMisServicios);
-router.get('/obtener-servicios/:id', obtenerServicioPorId);
-router.put('/actualizar-servicios/:id', actualizarServicio);
-router.delete('/borrar-servicios/:id', eliminarServicio);
+
+router.get('/', buscarServicios);
+router.get('/:id', obtenerServicioPorId);
+
+router.post('/', verificarToken, esProfesional, crearServicio);
+router.get('/mis-servicios/lista', verificarToken, obtenerMisServicios);
+router.put('/:id', verificarToken, esProfesional, actualizarServicio);
+router.delete('/:id', verificarToken, esProfesional, eliminarServicio);
 
 module.exports = router;

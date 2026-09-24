@@ -1,6 +1,6 @@
-const conexion = require('../config/database'); // Tu conexión de la imagen
+const conexion = require('../config/database');
 
-// 1. Crear un nuevo servicio
+
 const crearServicio = (datosServicio, callback) => {
   const { profesional_id, categoria_id, titulo, descripcion, precio } = datosServicio;
 
@@ -26,7 +26,7 @@ const crearServicio = (datosServicio, callback) => {
   );
 };
 
-// 2. Buscar/Listar servicios activos (con filtros opcionales)
+
 const buscarServicios = (filtros = {}, callback) => {
   const { categoria_id, zona } = filtros;
 
@@ -71,7 +71,7 @@ const buscarServicios = (filtros = {}, callback) => {
   });
 };
 
-// 3. Obtener el detalle de un único servicio por ID
+
 const obtenerServicioPorId = (servicioId, callback) => {
   const sql = `
     SELECT 
@@ -104,7 +104,7 @@ const obtenerServicioPorId = (servicioId, callback) => {
   });
 };
 
-// 4. Listar servicios pertenecientes a un profesional específico
+
 const obtenerServiciosPorProfesional = (profesionalId, callback) => {
   const sql = `
     SELECT 
@@ -127,7 +127,7 @@ const obtenerServiciosPorProfesional = (profesionalId, callback) => {
   });
 };
 
-// 5. Actualizar un servicio
+
 const actualizarServicio = (servicioId, profesionalId, datos, callback) => {
   const { categoria_id, titulo, descripcion, precio } = datos;
 
@@ -147,7 +147,7 @@ const actualizarServicio = (servicioId, profesionalId, datos, callback) => {
   );
 };
 
-// 6. Eliminar un servicio (baja lógica)
+
 const eliminarServicio = (servicioId, profesionalId, callback) => {
   const sql = `
     UPDATE servicios 

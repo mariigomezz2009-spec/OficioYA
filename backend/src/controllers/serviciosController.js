@@ -1,16 +1,16 @@
 const serviciosService = require('../services/serviciosService');
 
-// 1. Crear un nuevo servicio
+
 const crearServicio = (req, res) => {
   const { categoria_id, titulo, descripcion, precio } = req.body;
 
-  // Validaciones de campos requeridos
+
   if (!categoria_id || !titulo) {
     return res.status(400).json({ mensaje: 'La categoría y el título son obligatorios' });
   }
 
   const datosServicio = {
-    profesional_id: req.profesional_id, // Viene del middleware esProfesional
+    profesional_id: req.profesional_id, 
     categoria_id,
     titulo,
     descripcion,
@@ -29,7 +29,7 @@ const crearServicio = (req, res) => {
   });
 };
 
-// 2. Buscar/Listar todos los servicios activos (público)
+
 const buscarServicios = (req, res) => {
   const filtros = {
     categoria_id: req.query.categoria_id,
@@ -45,7 +45,7 @@ const buscarServicios = (req, res) => {
   });
 };
 
-// 3. Obtener detalle de un servicio por ID (público)
+
 const obtenerServicioPorId = (req, res) => {
   const servicioId = req.params.id;
 
@@ -63,9 +63,9 @@ const obtenerServicioPorId = (req, res) => {
   });
 };
 
-// 4. Listar servicios creados por el profesional autenticado
+
 const obtenerMisServicios = (req, res) => {
-  const profesionalId = req.profesional_id; // Viene del middleware esProfesional
+  const profesionalId = req.profesional_id; 
 
   serviciosService.obtenerServiciosPorProfesional(profesionalId, (err, servicios) => {
     if (err) {
@@ -76,7 +76,7 @@ const obtenerMisServicios = (req, res) => {
   });
 };
 
-// 5. Actualizar un servicio
+
 const actualizarServicio = (req, res) => {
   const servicioId = req.params.id;
   const profesionalId = req.profesional_id;
@@ -104,7 +104,7 @@ const actualizarServicio = (req, res) => {
   });
 };
 
-// 6. Eliminar un servicio (Baja lógica)
+
 const eliminarServicio = (req, res) => {
   const servicioId = req.params.id;
   const profesionalId = req.profesional_id;
